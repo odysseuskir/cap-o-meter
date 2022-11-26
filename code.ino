@@ -1,5 +1,3 @@
-
-
 int echoPin = 12; // Echo Pin
 int trigPin = 13; // Trigger Pin
 int maximumRange = 30; // Maximum range needed
