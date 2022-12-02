@@ -1,3 +1,8 @@
+/*
+Author: Odysseus-Abraham Kirikopoulos
+This program is protected under the GNU General Public License v3.0
+*/
+
 int echoPin = 12; // Echo Pin
 int trigPin = 13; // Trigger Pin
 int maximumRange = 30; // Maximum range needed
@@ -23,12 +28,14 @@ void loop() {
     duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
     distance = duration/58.2; // Calculating the distance
 
-    if (distance < 5) {
+    if (distance > 4) {
         count++; // Adds 1 to the count
         Serial.println(count); // Prints the count
-        delay(20); // Waits 20 milliseconds
+        delay(50); // Waits 50 milliseconds
     }
   
     delay(5);  // Waits 5 milliseconds
 
 }
+
+// ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | GNU GENERAL PUBLIC LICENSE V3.0 | SOME RIGHTS RESERVED
