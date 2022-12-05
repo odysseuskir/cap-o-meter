@@ -3,14 +3,36 @@ Author: Odysseus-Abraham Kirikopoulos
 This program is protected under the GNU General Public License v3.0
 */
 
-int echoPin = 12; // Echo Pin
+#include <SevSeg.h>
+
+// Declare variables
+
+int echoPin = A1; // Echo Pin
 int trigPin = 13; // Trigger Pin
-int maximumRange = 30; // Maximum range needed
-long duration, distance; // Duration used to calculate distance | Distance in cm
-int pinA = 11;int pinB = 7;int pinC = 4;int pinD = 2;
-int pinE = 1;int pinF = 10;int pinG = 5;
-int pinDP = 3;int D1 = A1;int D2 = 9;int D3 = 8; int D4 = 6;
-int count[] = {0, 0, 0, 0};
+
+long duration; // Duration used to calculate distance
+long distance; // Distance in cm
+
+int pinA = 11; // Pins for 7-Segment Display
+int pinB = 7;
+int pinC = 4;
+int pinD = 2;
+int pinE = 1;
+int pinF = 10;
+int pinG = 5;
+int pinDP = 3;
+int D1 = 12;
+int D2 = 9;
+int D3 = 8;
+int D4 = 6;
+
+// Counter
+
+int count_1000 = 0; // Example: In num 1234 this represents 1000
+int count_100 = 0; // Example: In num 1234 this represents 200
+int count_10 = 0; // Example: In num 1234 this represents 30
+int count_1 = 0; // Example: In num 1234 this represents 4
+int count = count_1000 + count_100 + count_10 + count_1;
 
 void setup() {
 
@@ -18,7 +40,7 @@ void setup() {
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
   Serial.begin(9600); // Starts the serial communication
 
-  pinMode(pinA, OUTPUT);
+  pinMode(pinA, OUTPUT); // Sets all display segments & digits as outputs
   pinMode(pinB, OUTPUT);
   pinMode(pinC, OUTPUT);
   pinMode(pinD, OUTPUT);
@@ -31,7 +53,7 @@ void setup() {
   pinMode(D3, OUTPUT);
   pinMode(D4, OUTPUT);
 
-  digit1();zero();
+  digit1();zero(); // Sets display to 0000
   digit2();zero();
   digit3();zero();
   digit4();zero();
@@ -40,81 +62,79 @@ void setup() {
 
 void loop() {
 
-  analogWrite(trigPin, LOW); // Sets the trigPin on LOW state for 2 micro seconds
+  digitalWrite(trigPin, LOW); // Sets the trigPin on LOW state for 2 micro seconds
   delayMicroseconds(2); // 2 microsecond pause to ensure a clean LOW pulse
-  analogWrite(trigPin, HIGH); // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH); // Sets the trigPin on HIGH state for 10 micro seconds
   delayMicroseconds(10); // 0 microsecond pause to ensure a clean HIGH pulse
-  analogWrite(trigPin, LOW); // Sets the trigPin on LOW state
+  digitalWrite(trigPin, LOW); // Sets the trigPin on LOW state
 
   duration = pulseIn(echoPin, HIGH); // Reads the echoPin, returns the sound wave travel time in microseconds
   distance = duration/58.2; // Calculating the distance
 
   if (distance > 4) {
     
-      if (count[3] > 9) {
-        count[3] = 0;
-        if (count[2] > 9) {
-          count[2] = 0;
-          if (count[1] > 9) {
-            count[1] = 0;
-            if (count[0] > 9) {
-              count[0] = 0;
+      if (count_1 > 9) {
+        count_1 = 0;
+        if (count_10 > 9) {
+          count_10 = 0;
+          if (count_100 > 9) {
+            count_100 = 0;
+            if (count_1000 > 9) {
+              count_1000 = 0;
               digit1();zero();
               digit2();zero();
               digit3();zero();
               digit4();zero();
             } else {
-              count[0]++;
+              count_1000++;
             }
           } else {
-            count[1]++;
+            count_100++;
           }
         } else {
-          count[2]++;
+          count_10++;
         }
       } else {
-        count[3]++;
+        count_1++;
       }
       
       delay(50); // Waits 50 milliseconds
   }
 
+  turnOnAllDigits();
   updateAllDigits();
-  
-//  Serial.println(count[0]);
-//  Serial.println(count[1]);
-//  Serial.println(count[2]);
-//  Serial.println(count[3]);
 
-  Serial.println(distance);
+  count = count_1000 + count_100 + count_10 + count_1;
+  
+  Serial.println(count);
 
   delay(5);  // Waits 5 milliseconds
 
 }
 
-// Update digit functions
+// Update digits
 
 void updateDigit1() {
 
-   if (count[0] = 0) {
+   if (count_1000 = 0) {
     digit1();zero();
-   } else if (count[0] = 1) {
+   } else if (count_1000 = 1) {
     digit1();one();
-   } else if (count[0] = 2) {
+   } else if (count_1000 = 2) {
     digit1;two();
-   } else if (count[0] = 3) {
+   } else if (count_1000 = 3) {
     digit1;three();
-   } else if (count[0] = 4) {
+   } else if (count_1000 = 4) {
     digit1;four();
-   } else if (count[0] = 5) {
+   } else if (count_1000 = 5) {
     digit1;five();
-   } else if (count[0] = 6) {
+   } else if (count_1000 = 6) {
     digit1;six();
-   } else if (count[0] = 7) {
+   } else if (count_1000 = 7) {
     digit1;seven();
-   } else if (count[0] = 8) {
+   } else if (count_1000 = 8) {
     digit1;eight();
-   } else if (count[0] = 9) {
+   } else if (count_1000 = 9) {
     digit1;nine();
    }
 
@@ -122,25 +142,25 @@ void updateDigit1() {
 
 void updateDigit2() {
 
-   if (count[1] = 0) {
+   if (count_100 = 0) {
     digit2();zero();
-   } else if (count[1] = 1) {
+   } else if (count_100 = 1) {
     digit2();one();
-   } else if (count[1] = 2) {
+   } else if (count_100 = 2) {
     digit2;two();
-   } else if (count[1] = 3) {
+   } else if (count_100 = 3) {
     digit2;three();
-   } else if (count[1] = 4) {
+   } else if (count_100 = 4) {
     digit2;four();
-   } else if (count[1] = 5) {
+   } else if (count_100 = 5) {
     digit2;five();
-   } else if (count[1] = 6) {
+   } else if (count_100 = 6) {
     digit2;six();
-   } else if (count[1] = 7) {
+   } else if (count_100 = 7) {
     digit2;seven();
-   } else if (count[1] = 8) {
+   } else if (count_100 = 8) {
     digit2;eight();
-   } else if (count[1] = 9) {
+   } else if (count_100 = 9) {
     digit2;nine();
    }
 
@@ -148,25 +168,25 @@ void updateDigit2() {
 
 void updateDigit3() {
 
-   if (count[2] = 0) {
+   if (count_10 = 0) {
     digit3();zero();
-   } else if (count[2] = 1) {
+   } else if (count_10 = 1) {
     digit3();one();
-   } else if (count[2] = 2) {
+   } else if (count_10 = 2) {
     digit3;two();
-   } else if (count[2] = 3) {
+   } else if (count_10 = 3) {
     digit3;three();
-   } else if (count[2] = 4) {
+   } else if (count_10 = 4) {
     digit3;four();
-   } else if (count[2] = 5) {
+   } else if (count_10 = 5) {
     digit3;five();
-   } else if (count[2] = 6) {
+   } else if (count_10 = 6) {
     digit3;six();
-   } else if (count[2] = 7) {
+   } else if (count_10 = 7) {
     digit3;seven();
-   } else if (count[2] = 8) {
+   } else if (count_10 = 8) {
     digit3;eight();
-   } else if (count[2] = 9) {
+   } else if (count_10 = 9) {
     digit3;nine();
    }
 
@@ -174,25 +194,25 @@ void updateDigit3() {
 
 void updateDigit4() {
 
-   if (count[3] = 0) {
+   if (count_1 = 0) {
     digit4();zero();
-   } else if (count[3] = 1) {
+   } else if (count_1 = 1) {
     digit4();one();
-   } else if (count[3] = 2) {
+   } else if (count_1 = 2) {
     digit4;two();
-   } else if (count[3] = 3) {
+   } else if (count_1 = 3) {
     digit4;three();
-   } else if (count[3] = 4) {
+   } else if (count_1 = 4) {
     digit4;four();
-   } else if (count[3] = 5) {
+   } else if (count_1 = 5) {
     digit4;five();
-   } else if (count[3] = 6) {
+   } else if (count_1 = 6) {
     digit4;six();
-   } else if (count[3] = 7) {
+   } else if (count_1 = 7) {
     digit4;seven();
-   } else if (count[3] = 8) {
+   } else if (count_1 = 8) {
     digit4;eight();
-   } else if (count[3] = 9) {
+   } else if (count_1 = 9) {
     digit4;nine();
    }
 
@@ -309,7 +329,20 @@ void nine(){
   digitalWrite(pinG, LOW);
 }
 
-// Activation of individual digits
+void allNumbers(){
+  one();delay(500);
+  two();delay(500);
+  three();delay(500);
+  four();delay(500);
+  five();delay(500);
+  six();delay(500);
+  seven();delay(500);
+  eight();delay(500);
+  nine();delay(500);
+}
+
+
+// Individual digits
 
 void digit1(){
   digitalWrite(D1, HIGH);
@@ -337,6 +370,23 @@ void digit4(){
   digitalWrite(D2, LOW);
   digitalWrite(D3, LOW);
   digitalWrite(D4, HIGH);
+}
+
+void turnOnAllDigits(){
+  digitalWrite(D1, HIGH);
+  digitalWrite(D2, HIGH);
+  digitalWrite(D3, HIGH);
+  digitalWrite(D4, HIGH);
+}
+
+void turnOffAllSegments(){
+  digitalWrite(pinA, LOW);
+  digitalWrite(pinB, LOW);
+  digitalWrite(pinC, LOW);
+  digitalWrite(pinD, LOW);
+  digitalWrite(pinE, LOW);
+  digitalWrite(pinF, LOW);
+  digitalWrite(pinG, LOW);
 }
 
 // ODYSSEUS-ABRAHAM KIRIKOPOULOS | 2022 | GNU GENERAL PUBLIC LICENSE V3.0 | SOME RIGHTS RESERVED
