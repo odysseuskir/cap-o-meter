@@ -5,7 +5,7 @@
 
 #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x27, 16, 2); // Recognizing 
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Recognizing LCD
 
 int echoPin = A1; // Echo Pin
 int trigPin = A2; // Trigger Pin
