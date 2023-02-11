@@ -7,7 +7,7 @@
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // Recognizing LCD
 
-int outPin = 13; // Output pin
+int sensorPin = 13; // Output pin
 
 int alarmPin = 8; // Buzzer
 int ledPin = 9; // LED
@@ -19,7 +19,7 @@ void setup() {
   lcd.init(); // Initialize the lcd
   lcd.backlight(); // Turn on the backlight
 
-  pinMode(outPin, OUTPUT); // Sets the outPin as an Output
+  pinMode(sensorPin, INPUT); // Sets the sensorPin as an Output
 
   pinMode(alarmPin, OUTPUT); // Sets the alarmPin as an Output
   
@@ -34,7 +34,7 @@ void loop() {
   lcd.setCursor(0,0); // Set the cursor to the first column, first row
   lcd.print("Cups:"); // Print the cups
 
-  int reading = pulseIn(outPin, HIGH); // Reads the outPin, and times the HIGH pulse in microseconds
+  int reading = digitalRead(sensorPin);
 
   if (reading == 1) { // If the reading is true
    
@@ -45,7 +45,7 @@ void loop() {
 
       Serial.println(count); // Print the count on the serial monitor
      
-      delay(50); // Waits 50 milliseconds
+      delay(10); // Waits 50 milliseconds
      
   } else {
 
@@ -57,6 +57,6 @@ void loop() {
   lcd.setCursor(5,0); // Set the cursor to the fifth column, first row
   lcd.print(count); // Print the count
   
-  delay(50);  // Waits 50 milliseconds
+  delay(10);  // Waits 50 milliseconds
 
 }
