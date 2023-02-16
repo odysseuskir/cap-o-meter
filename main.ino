@@ -13,6 +13,8 @@ int alarmPin = 8; // Buzzer
 int ledPin = 9; // LED
 
 int count = 0; // How mamy cups have been collected
+float percentage;
+String percentage_str;
 
 void setup() {
 
@@ -43,6 +45,7 @@ void loop() {
       digitalWrite(alarmPin, HIGH); // Turn on the alarm
       digitalWrite(ledPin, HIGH); // Turn on the LED
 
+      calculatePercentage();
       Serial.println(count); // Print the count on the serial monitor
      
       delay(10); // Waits 50 milliseconds
@@ -56,7 +59,19 @@ void loop() {
 
   lcd.setCursor(5,0); // Set the cursor to the fifth column, first row
   lcd.print(count); // Print the count
+  lcd.setCursor(11, 0);
+  lcd.print(percentage_str);
   
   delay(10);  // Waits 50 milliseconds
+
+}
+
+void calculatePercentage() {
+
+  percentage = count / 5400;
+
+  percentage = ((int)percentage) + 1;
+
+  percentage_str = String(percentage) + "%";
 
 }
