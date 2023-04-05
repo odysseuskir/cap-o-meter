@@ -1,4 +1,4 @@
--/*
+/*
  * Authors: Odysseus-Abraham Kirikopoulos & Nikos Tsilas
  * This program is under the GNU General Public License V3
  */
@@ -15,9 +15,6 @@ int ledPin = 9; // LED
 int switchPin = 6; // Switch
 
 int count = 0; // How mamy cups have been collected
-
-float percentage;
-String percentage_str;
 
 void setup() {
 
@@ -63,8 +60,6 @@ void loop() {
 
       digitalWrite(alarmPin, HIGH); // Turn on the alarm
       digitalWrite(ledPin, HIGH); // Turn on the LED
-
-      calculatePercentage();
      
       delay(10); // Waits 50 milliseconds
      
@@ -84,23 +79,11 @@ void loop() {
 
   lcd.setCursor(5,0); // Set the cursor to the fifth column, first row
   lcd.print(count); // Print the count
-  lcd.setCursor(11, 0);
-  lcd.print(percentage_str);
 
   Serial.println(count); // Print the count on the serial monitor
 
   EEPROM.update(0, count);
   
   delay(10);  // Waits 50 milliseconds
-
-}
-
-void calculatePercentage() {
-
-  percentage = count / 540000;
-
-  percentage++;
-
-  percentage_str = String(percentage) + "%";
 
 }
