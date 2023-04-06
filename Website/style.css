@@ -1,0 +1,19 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#banner {
+    background-color: cornflowerblue;
+}
+
+#faq {
+    background-color: #44d8a7;
+}
+
+#hardware-software {
+    background-color: #d34e10;
+}
+
+div {
+    padding: 10px;
+}
