@@ -1,4 +1,4 @@
-# License for the provided hardware designs
+# License for the provided hardware and 3D designs
 
 ## CERN Open Hardware Licence Version 2 - Strongly Reciprocal
 
