@@ -265,7 +265,7 @@ made by You pursuant to subsection 3.2.
 
 # License for the code provided
 
-## GNU Generaal Public License Version 3
+## GNU General Public License Version 3
 
 GNU GENERAL PUBLIC LICENSE
 
