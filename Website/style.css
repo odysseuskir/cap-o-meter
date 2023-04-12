@@ -28,11 +28,17 @@ body {
   padding: 20px;
 }
 
-#details h3 {
+#teamwork {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h3 {
   color: #336699;
 }
 
-#details p {
+p {
   line-height: 1.5;
 }
 
@@ -69,8 +75,6 @@ button:hover {
   background-color: #0077be;
 }
 
-
-
 button:focus {
   outline: none;
 }
@@ -78,4 +82,8 @@ button:focus {
 button:active {
   background-color: #2f673e;
   transform: translateY(1px);
+}
+
+img {
+  max-width: 100%;
 }
