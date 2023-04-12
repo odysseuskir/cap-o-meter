@@ -1,23 +1,81 @@
-* {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
 }
 
+/* Banner styles */
 #banner {
-    background-color: cornflowerblue;
+  background-color: #336699;
+  color: white;
+  padding: 20px;
 }
 
-#faq {
-    background-color: #44d8a7;
+#banner h1 {
+  margin: 0;
 }
 
-#hardware-software {
-    background-color: #d34e10;
+#banner h2 {
+  margin: 0;
+  font-size: 20px;
+  font-style: italic;
 }
 
-#competitions {
-    background-color: #d3a810;
+/* Details styles */
+#details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-div {
-    padding: 10px;
+#details h3 {
+  color: #336699;
+}
+
+#details p {
+  line-height: 1.5;
+}
+
+#more-info {
+  background-color: #f7f7f7;
+  padding: 20px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+#more-info h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+#more-info p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #1b4965;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #0077be;
+}
+
+
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  background-color: #2f673e;
+  transform: translateY(1px);
 }
