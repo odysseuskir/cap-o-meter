@@ -34,8 +34,18 @@ body {
     padding: 20px;
 }
 
+#team {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 h3 {
   color: #336699;
+}
+
+h4 {
+  color: #417ab3;
 }
 
 p {
